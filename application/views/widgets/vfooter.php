@@ -16,5 +16,5 @@
 	    <a href="#" data-icon="arrow-u">Up</a>
 	    <a href="#" data-icon="arrow-d">Down</a>
     -->
-    <h1>Footer</h1>
+    <h1>Mandiri Finance Indonesia</h1>
 </div>

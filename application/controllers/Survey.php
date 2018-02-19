@@ -14,12 +14,21 @@ class Survey extends CI_Controller {
 		$data['status_konsumen'] = $this->MSurvey->getReferensi('status_konsumen');
 		$data['jenis_pembiayaan'] = $this->MSurvey->getReferensi('jenis_pembiayaan');
 		$data['jenis_kelamin'] = $this->MSurvey->getReferensi('jenis_kelamin');
-
-		// TAB C2
+		$data['agama_konsumen'] = $this->MSurvey->getReferensi('agama');
+		$data['alamat_surat'] = $this->MSurvey->getReferensi('alamat_surat');
 		$data['pekerjaan'] = $this->MSurvey->getReferensi('pekerjaan');
 		$data['pendidikan'] = $this->MSurvey->getReferensi('pendidikan');
 
+		// TAB C2
+		$data['dealer'] = $this->MSurvey->getDealer(12);
+		$data['kondisi_kendaraan'] = $this->MSurvey->getReferensi('kondisi_kendaraan');
+		$data['jenis_uangmuka'] = array(1 => array('Y','DIMUKA'), 2 => array('N','DIBELAKANG'));
+		$data['jenis_kendaraan'] = $this->MSurvey->getReferensi('jenis_kendaraan');
+		$data['jenis_asuransi'] = array(1 => array('A','ALL RISK'), 2 => array('T','TOTAL LOST ONLY'));
+		$data['komersil'] = array(1 => array('Y','YA'), 2 => array('N','TIDAK'));
+
 		// TAB C3
+		$data['didampingi'] = array(1 => array('Y','YA'), 2 => array('N','TIDAK'));
 		$data['cek_lingkungan'] = $this->MSurvey->getRefSurvey('character_check_lingkungan');
 		$data['rekomendasi'] = $this->MSurvey->getRefSurvey('character_rekomendasi_lingkungan');
 

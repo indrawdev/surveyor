@@ -40,4 +40,20 @@ class MSurvey extends CI_Model {
 		$sSQL = $this->db->query($xSQL);
 		return $sSQL->result();
 	}
+
+	public function getDealer($sKdCab)
+	{
+		$xSQL = ("
+			SELECT fs_kode_dealer1, fs_kode_dealer2, fs_nama_dealer
+			FROM tm_dealer
+			WHERE fs_kode_cabang = '".trim($sKdCab)."'
+		");
+
+		$xSQL = $xSQL.("
+			ORDER BY fs_nama_dealer ASC
+		");
+
+		$sSQL = $this->db->query($xSQL);
+		return $sSQL->result();
+	}
 }
