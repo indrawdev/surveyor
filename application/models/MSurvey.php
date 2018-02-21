@@ -9,6 +9,19 @@ class MSurvey extends CI_Model {
 		$this->load->database();
 	}
 
+	public function checkAPK($sKdCab, $nNoApk)
+	{
+		$xSQL = ("
+			SELECT fs_kode_cabang, fn_no_apk, fs_nama_konsumen
+			FROM tx_aktifitas_surveyor
+			WHERE fs_kode_cabang = '".trim($sKdCab)."'
+			AND fn_no_apk = '".trim($nNoApk)."'
+		");
+
+		$sSQL = $this->db->query($xSQL);
+		return $sSQL;
+	}
+
 	public function getReferensi($sKode) 
 	{
 		$xSQL = ("
@@ -18,7 +31,7 @@ class MSurvey extends CI_Model {
 		");
 
 		$xSQL = $xSQL.("
-			ORDER BY fs_nilai1_referensi ASC
+			ORDER BY fs_nama_referensi ASC
 		");
 
 		$sSQL = $this->db->query($xSQL);
@@ -34,7 +47,7 @@ class MSurvey extends CI_Model {
 		");
 
 		$xSQL = $xSQL.("
-			ORDER BY fs_nilai1_referensi ASC
+			ORDER BY fs_nama_referensi ASC
 		");
 
 		$sSQL = $this->db->query($xSQL);

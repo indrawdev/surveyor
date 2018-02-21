@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <form method="post" id="c1" class="content_div">
+	<h4>DATA KONSUMEN</h4>
 	<div>
 		<div class="field-contain">
 		    <label for="jenis_aplikasi">Jenis Aplikasi:</label>
@@ -40,7 +41,7 @@
 			<input type="text" name="tempat_lahir" id="tempat_lahir" value="" data-clear-btn="true">
 		</div>
 		<div class="field-contain">
-			<label for="tanggal_lahir">Tanggal Lahir:</label>
+			<label for="tanggal_lahir">Tanggal Lahir Konsumen:</label>
 			<input type="date" name="tanggal_lahir" id="tanggal_lahir" value="" data-clear-btn="true">
 		</div>
 		<div class="field-contain">
@@ -62,6 +63,10 @@
 		    </select>
 		</div>
 		<div class="field-contain">
+			<label for="tanggal_lahir_pasangan">Tanggal Lahir Pasangan:</label>
+			<input type="date" name="tanggal_lahir_pasangan" id="tanggal_lahir_pasangan" value="" data-clear-btn="true">
+		</div>
+		<div class="field-contain">
 		    <label for="agama_konsumen">Agama:</label>
 		    <select name="agama_konsumen" id="agama_konsumen" data-native-menu="false">
 		    	<option>Pilih</option>
@@ -71,7 +76,7 @@
 		    </select>
 		</div>
 		<div class="field-contain">
-		    <label for="mail_address">Alamat Surat:</label>
+		    <label for="mail_address">Mail Address:</label>
 		    <select name="mail_address" id="mail_address" data-native-menu="false">
 		    	<option>Pilih</option>
 		        <?php foreach ($alamat_surat as $as) : ?>
@@ -80,7 +85,7 @@
 		    </select>
 		</div>
 		<div class="field-contain">
-			<label for="alamat_konsumen">Alamat Konsumen:</label>
+			<label for="alamat_konsumen">Alamat Sesuai KTP:</label>
 			<textarea cols="40" rows="8" name="alamat_konsumen" id="alamat_konsumen"></textarea>
 		</div>
 		<div class="field-contain">
@@ -111,7 +116,7 @@
 			<label for="telepon_konsumen">No Telepon Konsumen:</label>
 			<input type="text" name="telepon_konsumen" id="telepon_konsumen" value="" data-clear-btn="true">
 		</div>
-		<hr>
+		<h4>DATA PEKERJAAN / USAHA</h4>
 		<div class="field-contain">
 		    <label for="perkerjaan">Perkerjaan:</label>
 		    <select name="perkerjaan" id="perkerjaan" data-native-menu="false">
@@ -170,6 +175,7 @@
 </form>
 <form method="post" id="c2" class="content_div">
 	<div>
+		<h4>DATA PINJAMAN</h4>
 		<div class="field-contain">
 		    <label for="dealer">Dealer:</label>
 		    <select name="dealer" id="dealer" data-native-menu="false">
@@ -237,7 +243,7 @@
 			<label for="tahun_rakit">Tahun Rakit:</label>
 			<input type="text" name="tahun_rakit" id="tahun_rakit" value="" data-clear-btn="true">
 		</div>
-		<hr>
+		<br>
 		<div class="field-contain">
 			<label for="harga_otr">Harga OTR:</label>
 			<input type="number" name="harga_otr" id="harga_otr" value="" data-clear-btn="true">
@@ -329,6 +335,7 @@
 </form>
 <form method="post" id="c3" class="content_div">
 	<div>
+		<h4>CHARACTER</h4>
 		<div class="field-contain">
 		    <label for="didampingi_pasangan">Didampingi pasangan:</label>
 		    <select name="didampingi_pasangan" id="didampingi_pasangan" data-native-menu="false">
@@ -354,7 +361,7 @@
 			<label for="kodepos_pasangan">Kodepos:</label>
 			<input type="text" name="kodepos_pasangan" id="kodepos_pasangan" value="" data-clear-btn="true">
 		</div>
-		<hr>
+		<h4>KORESPONDENSI</h4>
 		<div class="field-contain">
 		    <label for="cek_lingkungan">Cek Lingkungan:</label>
 		    <select name="cek_lingkungan" id="cek_lingkungan" data-native-menu="false">
@@ -381,14 +388,58 @@
 			<label for="handphone_korespondensi">HP Korespondensi:</label>
 			<input type="text" name="handphone_korespondensi" id="handphone_korespondensi" value="" data-clear-btn="true">
 		</div>
-		<br>
+		<h4>DATA KELUARGA KANDUNG <i>(TIDAK TINGGAL SERUMAH)</i></h4>
+		<h4>COLLATERAL</h4>
 		<div class="field-contain">
-			<button data-theme="b">Submit</button>
+		    <label for="body">Body:</label>
+		    <select name="body" id="body" data-native-menu="false">
+		    	<option>Pilih</option>
+		    	<?php foreach ($body as $b) : ?>
+		        <option value="<?php echo $b->fs_nilai1_referensi; ?>"><?php echo $b->fs_nama_referensi; ?></option>
+		        <?php endforeach ; ?>
+		    </select>
 		</div>
-	</div>
-</form>
-<form method="post" id="c4" class="content_div">
-	<div>
+		<div class="field-contain">
+		    <label for="interior">Interior:</label>
+		    <select name="interior" id="interior" data-native-menu="false">
+		    	<option>Pilih</option>
+		    	<?php foreach ($interior as $i) : ?>
+		        <option value="<?php echo $i->fs_nilai1_referensi; ?>"><?php echo $i->fs_nama_referensi; ?></option>
+		        <?php endforeach ; ?>
+		    </select>
+		</div>
+		<div class="field-contain">
+		    <label for="mesin">Mesin:</label>
+		    <select name="mesin" id="mesin" data-native-menu="false">
+		    	<option>Pilih</option>
+		    	<?php foreach ($mesin as $m) : ?>
+		        <option value="<?php echo $m->fs_nilai1_referensi; ?>"><?php echo $m->fs_nama_referensi; ?></option>
+		        <?php endforeach ; ?>
+		    </select>
+		</div>
+		<div class="field-contain">
+		    <label for="rangka">Rangka:</label>
+		    <select name="rangka" id="rangka" data-native-menu="false">
+		    	<option>Pilih</option>
+		    	<?php foreach ($rangka as $r) : ?>
+		        <option value="<?php echo $r->fs_nilai1_referensi; ?>"><?php echo $r->fs_nama_referensi; ?></option>
+		        <?php endforeach ; ?>
+		    </select>
+		</div>
+		<div class="field-contain">
+		    <label for="aksesoris">Aksesoris:</label>
+		    <select name="aksesoris" id="aksesoris" data-native-menu="false">
+		    	<option>Pilih</option>
+		    	<?php foreach ($aksesoris as $a) : ?>
+		        <option value="<?php echo $a->fs_nilai1_referensi; ?>"><?php echo $a->fs_nama_referensi; ?></option>
+		        <?php endforeach ; ?>
+		    </select>
+		</div>
+		<div class="field-contain">
+			<label for="harga_pasar">Harga Pasar saat ini:</label>
+			<input type="number" name="harga_pasar" id="harga_pasar" value="" data-clear-btn="true">
+		</div>
+		<h4>CAPITAL</h4>
 		<div class="field-contain">
 			<label for="luas_bangunan">Luas Bangunan:</label>
 			<input type="number" name="luas_bangunan" id="luas_bangunan" value="" data-clear-btn="true">
@@ -474,15 +525,23 @@
 		    </select>
 		</div>
 		<div class="field-contain">
-		    <label for="bukti_kepemilikan_aset">Bukti Kepemilikan:</label>
+		    <label for="bukti_kepemilikan_aset">Bukti Kepemilikan Aset:</label>
 		    <select name="bukti_kepemilikan_aset" id="bukti_kepemilikan_aset" data-native-menu="false">
 		    	<option>Pilih</option>
-		        <option value="1">The 1st Option</option>
-		        <option value="2">The 2nd Option</option>
-		        <option value="3">The 3rd Option</option>
-		        <option value="4">The 4th Option</option>
+		        <?php foreach ($bukti_kepemilikan_aset as $bka): ?>
+		        <option value="<?php echo $bka->fs_nilai1_referensi; ?>"><?php echo $bka->fs_nama_referensi; ?></option>
+		        <?php endforeach ; ?>
 		    </select>
 		</div>
+		<br>
+		<div class="field-contain">
+			<button data-theme="b">Submit</button>
+		</div>
+	</div>
+</form>
+<form method="post" id="c4" class="content_div">
+	<div>
+		
 		<br>
 		<div class="field-contain">
 			<button data-theme="b">Submit</button>
