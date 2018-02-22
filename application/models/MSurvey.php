@@ -69,4 +69,17 @@ class MSurvey extends CI_Model {
 		$sSQL = $this->db->query($xSQL);
 		return $sSQL->result();
 	}
+
+	public function getAktifitas($sKdCab, $nNoApk)
+	{
+		$xSQL = ("
+			SELECT *
+			FROM tx_aktifitas_surveyor
+			WHERE fs_kode_cabang = '".trim($sKdCab)."'
+			AND fn_no_apk = '".trim($nNoApk)."'
+		");
+
+		$sSQL = $this->db->query($xSQL);
+		return $sSQL->row();
+	}
 }

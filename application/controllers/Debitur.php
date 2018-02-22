@@ -3,9 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Debitur extends CI_Controller {
 
+	public function __construct() {
+		parent::__construct();
+		/*
+		if ($this->session->userdata('login') <> TRUE) {
+			redirect('login');
+		}
+		*/
+	}
+
 	public function index() {
-		$this->template->title = 'Daftar Survey';
-		$data = array();
+		$this->template->title = 'DAFTAR SURVEY';
+
+		$this->load->model('MDebitur');
+		$data['konsumen'] = $this->MDebitur->getDebitur();
 		$this->template->content->view('vdebitur', $data);
 		$this->template->publish();
 	}

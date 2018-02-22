@@ -3,8 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Survey extends CI_Controller {
 
+	public function __construct() {
+		parent::__construct();
+		/*
+		if ($this->session->userdata('login') <> TRUE) {
+			redirect('login');
+		}
+		*/
+	}
+
 	public function index() {
-		$this->template->title = 'Form Survey';
+		redirect('debitur');
+	}
+
+	public function survey1($cabang, $noapk) {
+		$this->template->title = 'FORM SURVEY C1';
 		$this->template->stylesheet->add('assets/css/custom.css', array('media' => 'all'));
 		$this->template->javascript->add('assets/js/survey.js');
 
@@ -18,26 +31,54 @@ class Survey extends CI_Controller {
 		$data['alamat_surat'] = $this->MSurvey->getReferensi('alamat_surat');
 		$data['pekerjaan'] = $this->MSurvey->getReferensi('pekerjaan');
 		$data['pendidikan'] = $this->MSurvey->getReferensi('pendidikan');
+		// KONSUMEN
+		$data['debitur'] = $this->MSurvey->getAktifitas($cabang, $noapk);
 
+		$this->template->content->view('vsurveyc1', $data);
+		$this->template->publish();
+	}
+
+	public function survey2($cabang, $noapk) {
+		$this->template->title = 'FORM SURVEY C2';
+		$this->template->stylesheet->add('assets/css/custom.css', array('media' => 'all'));
+		$this->template->javascript->add('assets/js/survey.js');
+
+		$this->load->model('MSurvey');
 		// TAB C2
-		$data['dealer'] = $this->MSurvey->getDealer(12);
+		$data['dealer'] = $this->MSurvey->getDealer($cabang);
 		$data['kondisi_kendaraan'] = $this->MSurvey->getReferensi('kondisi_kendaraan');
 		$data['jenis_uangmuka'] = array(1 => array('Y','DIMUKA'), 2 => array('N','DIBELAKANG'));
 		$data['jenis_kendaraan'] = $this->MSurvey->getReferensi('jenis_kendaraan');
 		$data['jenis_asuransi'] = array(1 => array('A','ALL RISK'), 2 => array('T','TOTAL LOST ONLY'));
 		$data['komersil'] = array(1 => array('Y','YA'), 2 => array('N','TIDAK'));
+		// KONSUMEN
+		$data['debitur'] = $this->MSurvey->getAktifitas($cabang, $noapk);
+
+		$this->template->content->view('vsurveyc2', $data);
+		$this->template->publish();
+	}
+
+	public function survey3($cabang, $noapk) {
+		$this->template->title = 'FORM SURVEY C3';
+		$this->template->stylesheet->add('assets/css/custom.css', array('media' => 'all'));
+		$this->template->javascript->add('assets/js/survey.js');
+
+		$this->load->model('MSurvey');
 
 		// TAB C3
 		$data['didampingi'] = array(1 => array('Y','YA'), 2 => array('N','TIDAK'));
 		$data['cek_lingkungan'] = $this->MSurvey->getRefSurvey('character_check_lingkungan');
 		$data['rekomendasi'] = $this->MSurvey->getRefSurvey('character_rekomendasi_lingkungan');
+
+		$data['jenis_kelamin'] = $this->MSurvey->getReferensi('jenis_kelamin');
+		$data['relasi_pemohon'] = $this->MSurvey->getRefSurvey('character_keluarga_kandung_tidak_serumah');
+
 		$data['body'] = $this->MSurvey->getRefSurvey('colateral_body');
 		$data['interior'] = $this->MSurvey->getRefSurvey('colateral_interior');
 		$data['mesin'] = $this->MSurvey->getRefSurvey('colateral_mesin');
 		$data['rangka'] = $this->MSurvey->getRefSurvey('colateral_chassis');
 		$data['aksesoris'] = $this->MSurvey->getRefSurvey('colateral_accessories');
 
-		// TAB C4
 		$data['status_kepemilikan'] = $this->MSurvey->getRefSurvey('capital_status_kepemilikan');
 		$data['bukti_kepemilikan'] = $this->MSurvey->getRefSurvey('capital_bukti_kepemilikan');
 		$data['dinding_rumah'] = $this->MSurvey->getRefSurvey('capital_dinding_rumah');
@@ -47,18 +88,30 @@ class Survey extends CI_Controller {
 		$data['kondisi_lingkungan'] = $this->MSurvey->getRefSurvey('capital_kondisi_lingkungan');
 		$data['perabotan_rumah'] = $this->MSurvey->getRefSurvey('capital_perabotan_rumah');
 		$data['bukti_kepemilikan_aset'] = $this->MSurvey->getRefSurvey('capital_bukti_kepemilikan_asset');
+		// KONSUMEN
+		$data['debitur'] = $this->MSurvey->getAktifitas($cabang, $noapk);
 
-		$this->template->content->view('vsurvey', $data);
+		$this->template->content->view('vsurveyc3', $data);
 		$this->template->publish();
 	}
 
-	public function select() {
-		
+	public function survey4($cabang, $noapk) {
+		$this->template->title = 'FORM SURVEY C4';
+		$this->template->stylesheet->add('assets/css/custom.css', array('media' => 'all'));
+		$this->template->javascript->add('assets/js/survey.js');
+
+		$this->load->model('MSurvey');
+
+		// KONSUMEN
+		$data['debitur'] = $this->MSurvey->getAktifitas($cabang, $noapk);
+
+		$this->template->content->view('vsurveyc4', $data);
+		$this->template->publish();
 	}
 
 	public function submitc1() {
 		$user = $this->encryption->decrypt($this->session->userdata('username'));
-		$cabang = $this->encryption->decrypt($this->session->userdata('kodecabang'));
+		$cabang = $this->input->post('fs_kode_cabang');
 		$noapk = $this->input->post('fn_no_apk');
 
 		$nama_konsumen = $this->input->post('fs_nama_konsumen');
@@ -94,37 +147,7 @@ class Survey extends CI_Controller {
 		$telepon_perusahaan = $this->input->post('fs_telepon_perusahaan');
 		$pendidikan = $this->input->post('fs_pendidikan');
 		$kegiatan_usaha = $this->input->post('fs_kegiatan_usaha');
-		$nama_dealer = $this->input->post('fs_nama_dealer');
-		$kondisi_kendaraan = $this->input->post('fs_kondisi_kendaraan');
-		$merk_kendaraan = $this->input->post('fs_merk_kendaraan');
-		$jenis_kendaraan = $this->input->post('fs_jenis_kendaraan');
-		$model_kendaraan = $this->input->post('fs_model_kendaraan');
-		$tipe_kendaraan = $this->input->post('fs_tipe_kendaraan');
-		$tahun_kendaraan = $this->input->post('fn_tahun_kendaraan');
-		$tahun_rakit = $this->input->post('fn_tahun_rakit');
-		$warna_kendaraan = $this->input->post('fs_warna_kendaraan');
-		$no_rangka = $this->input->post('fs_no_rangka');
-		$no_mesin = $this->input->post('fs_no_mesin');
-		$no_faktur = $this->input->post('fs_no_faktur');
-		$komersial = $this->input->post('fs_komersial');
-		$nama_bpkb = $this->input->post('fs_nama_bpkb');
-		$nomor_bpkb = $this->input->post('fs_nomor_bpkb');
-		$no_polisi = $this->input->post('fs_no_polisi');
-		$harga_otr = $this->input->post('fn_harga_otr');
-		$dp_bayar = $this->input->post('fn_dp_bayar');
-		$angsuran_dimuka = $this->input->post('fs_angsuran_dimuka');
-		$pokok_pembiayaan = $this->input->post('fn_pokok_pembiayaan');
-		$premi_asuransi = $this->input->post('fn_premi_asuransi');
-		$total_pokok_pembiayaan = $this->input->post('fn_total_pokok_pembiayaan');
-		$bunga = $this->input->post('fn_bunga');
-		$persen_bunga_flat = $this->input->post('fn_persen_bunga_flat');
-		$persen_bunga_efektif = $this->input->post('fn_persen_bunga_efektif');
-		$kali_angsuran_dimuka = $this->input->post('fn_kali_angsuran_dimuka');
-		$piutang = $this->input->post('fn_piutang');
-		$angsuran = $this->input->post('fn_angsuran');
-		$biaya_adm = $this->input->post('fn_biaya_adm');
-		$biaya_provisi = $this->input->post('fn_biaya_provisi');
-		$biaya_cek_bpkb = $this->input->post('fn_biaya_cek_bpkb');
+		
 		$pemohon_didampingi = $this->input->post('fs_pemohon_didampingi');
 		$handphone_pasangan = $this->input->post('fs_handphone_pasangan');
 		$alamat_survey = $this->input->post('fs_alamat_survey');
@@ -183,14 +206,7 @@ class Survey extends CI_Controller {
 		$sisa_penghasilan = $this->input->post('fn_sisa_penghasilan');
 		$angsuran_diajukan = $this->input->post('fn_angsuran_diajukan');
 		$kondisi = $this->input->post('fs_kondisi');
-		$valid_ktp_pemohon = $this->input->post('fs_valid_ktp_pemohon');
-		$valip_ktp_pasangan = $this->input->post('fs_valip_ktp_pasangan');
-		$valid_kk = $this->input->post('fs_valid_kartu_keluarga');
-		$valid_shmpbbpln = $this->input->post('fs_valid_shmpbbpln');
-		$valid_slipgaji = $this->input->post('fs_valid_slipgaji');
-		$valid_npwp = $this->input->post('fs_valid_npwp');
-		$valid_stnk = $this->input->post('fs_valid_stnk');
-		$valid_kp = $this->input->post('fs_valid_kp');
+
 
 		$update = false;
 		$this->load->model('MSurvey');
@@ -319,6 +335,66 @@ class Survey extends CI_Controller {
 			'fn_sisa_penghasilan' => trim($sisa_penghasilan),
 			'fn_angsuran_diajukan' => trim($angsuran_diajukan),
 			'fs_kondisi' => trim($kondisi),
+		);
+	}
+
+	public function submitc2() {
+		$user = $this->encryption->decrypt($this->session->userdata('username'));
+		$cabang = $this->encryption->decrypt($this->session->userdata('kodecabang'));
+		$noapk = $this->input->post('fn_no_apk');
+
+		$nama_dealer = $this->input->post('fs_nama_dealer');
+		$kondisi_kendaraan = $this->input->post('fs_kondisi_kendaraan');
+		$merk_kendaraan = $this->input->post('fs_merk_kendaraan');
+		$jenis_kendaraan = $this->input->post('fs_jenis_kendaraan');
+		$model_kendaraan = $this->input->post('fs_model_kendaraan');
+		$tipe_kendaraan = $this->input->post('fs_tipe_kendaraan');
+		$tahun_kendaraan = $this->input->post('fn_tahun_kendaraan');
+		$tahun_rakit = $this->input->post('fn_tahun_rakit');
+		$warna_kendaraan = $this->input->post('fs_warna_kendaraan');
+		$no_rangka = $this->input->post('fs_no_rangka');
+		$no_mesin = $this->input->post('fs_no_mesin');
+		$no_faktur = $this->input->post('fs_no_faktur');
+		$komersial = $this->input->post('fs_komersial');
+		$nama_bpkb = $this->input->post('fs_nama_bpkb');
+		$nomor_bpkb = $this->input->post('fs_nomor_bpkb');
+		$no_polisi = $this->input->post('fs_no_polisi');
+		$harga_otr = $this->input->post('fn_harga_otr');
+		$dp_bayar = $this->input->post('fn_dp_bayar');
+		$angsuran_dimuka = $this->input->post('fs_angsuran_dimuka');
+		$pokok_pembiayaan = $this->input->post('fn_pokok_pembiayaan');
+		$premi_asuransi = $this->input->post('fn_premi_asuransi');
+		$total_pokok_pembiayaan = $this->input->post('fn_total_pokok_pembiayaan');
+		$bunga = $this->input->post('fn_bunga');
+		$persen_bunga_flat = $this->input->post('fn_persen_bunga_flat');
+		$persen_bunga_efektif = $this->input->post('fn_persen_bunga_efektif');
+		$kali_angsuran_dimuka = $this->input->post('fn_kali_angsuran_dimuka');
+		$piutang = $this->input->post('fn_piutang');
+		$angsuran = $this->input->post('fn_angsuran');
+		$biaya_adm = $this->input->post('fn_biaya_adm');
+		$biaya_provisi = $this->input->post('fn_biaya_provisi');
+		$biaya_cek_bpkb = $this->input->post('fn_biaya_cek_bpkb');
+
+		$dt = array(
+
+		);
+	}
+
+	public function submitc3() {
+		$user = $this->encryption->decrypt($this->session->userdata('username'));
+		$cabang = $this->encryption->decrypt($this->session->userdata('kodecabang'));
+		$noapk = $this->input->post('fn_no_apk');
+
+		$valid_ktp_pemohon = $this->input->post('fs_valid_ktp_pemohon');
+		$valip_ktp_pasangan = $this->input->post('fs_valip_ktp_pasangan');
+		$valid_kk = $this->input->post('fs_valid_kartu_keluarga');
+		$valid_shmpbbpln = $this->input->post('fs_valid_shmpbbpln');
+		$valid_slipgaji = $this->input->post('fs_valid_slipgaji');
+		$valid_npwp = $this->input->post('fs_valid_npwp');
+		$valid_stnk = $this->input->post('fs_valid_stnk');
+		$valid_kp = $this->input->post('fs_valid_kp');
+
+		$dt = array(
 			'fs_valid_ktp_pemohon' => trim($valid_ktp_pemohon),
 			'fs_valip_ktp_pasangan' => trim($valip_ktp_pasangan),
 			'fs_valid_kartu_keluarga' => trim($valid_kk),
@@ -330,15 +406,9 @@ class Survey extends CI_Controller {
 		);
 	}
 
-	public function submitc2() {
-
-	}
-
-	public function submitc3() {
-
-	}
-
 	public function submitc4() {
-
+		$user = $this->encryption->decrypt($this->session->userdata('username'));
+		$cabang = $this->encryption->decrypt($this->session->userdata('kodecabang'));
+		$noapk = $this->input->post('fn_no_apk');
 	}
 }

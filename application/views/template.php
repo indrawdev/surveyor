@@ -17,9 +17,9 @@
 <body>
 <div data-role="page">
     <?php echo $this->template->widget("header"); ?>
-    <div class="ui-content" role="main">
-        <?php echo $this->template->content; ?>
-    </div><!-- /content -->
+
+    <?php echo $this->template->content; ?>
+    
     <?php echo $this->template->widget("footer"); ?>
 </div>
 </body>

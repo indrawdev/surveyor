@@ -1,13 +1,9 @@
 <div data-role="header" data-theme="d">
-    <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
-    <h1>Form Survey</h1>
-    <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+	<?php if ($this->uri->segment(1) == 'survey') : ?>
+		<a href="<?php echo base_url('debitur'); ?>" data-icon="arrow-l" data-theme="e">Back</a>
+	<?php endif; ?>
+    <h1><?php echo $this->template->title->default("SURVEYOR"); ?></h1>
+    <?php if ($this->uri->segment(1) == 'debitur') : ?>
+		<a href="<?php echo base_url('login/logout'); ?>" data-icon="arrow-u" data-theme="b">Logout</a>
+	<?php endif; ?>
 </div><!-- /header -->
-<div data-role="navbar" data-grid="c">
-    <ul>
-        <li><a href="#" data-href="c1" class="ui-btn-active">C1</a></li>
-        <li><a href="#" data-href="c2">C2</a></li>
-        <li><a href="#" data-href="c3">C3</a></li>
-        <li><a href="#" data-href="c4">C4</a></li>
-    </ul>
-</div><!-- /navbar -->
