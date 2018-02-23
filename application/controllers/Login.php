@@ -17,9 +17,8 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('fs_password', 'Password', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$data['response'] = 'failed';
-			$data['message'] = validation_errors();
-			echo json_encode($data);
+			$this->session->set_flashdata('message', validation_errors());
+			redirect('login', 'refresh');
 		} else {
 			$username = trim(strtoupper($this->input->post('fs_username')));
 			$password = trim(strtoupper($this->input->post('fs_password')));
@@ -48,15 +47,11 @@ class Login extends CI_Controller {
 				$this->load->model('MLog');
 				$this->MLog->logger('LOGIN', $username, 'MASUK KE SISTEM SURVEY');
 				// END LOGGING
-
-				$data['response'] = 'success';
-				$data['redirect'] = 'debitur';
-				$data['message'] = 'Please wait...';
-				echo json_encode($data);
+				//$this->session->set_flashdata('message', 'Please wait...');
+				redirect('debitur', 'refresh');
 			} else {
-				$data['response'] = 'failed';
-				$data['message'] = 'Akun tidak ada...';
-				echo json_encode($data);
+				$this->session->set_flashdata('message', 'Akun tidak ada...');
+				redirect('login', 'refresh');
 			}
 		}
 	}

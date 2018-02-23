@@ -1,7 +1,7 @@
 <!-- /navbar -->
 <?php 
 	$fix = '';
-	if ($this->uri->segment(1) == 'login' || $this->uri->segment(1) == 'debitur') {
+	if ($this->uri->segment(1) == '' ||$this->uri->segment(1) == 'login' || $this->uri->segment(1) == 'debitur') {
 		$fix = 'data-position="fixed"';
 	}
 ?>

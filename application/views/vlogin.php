@@ -1,9 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="ui-content" role="main">
-	<form id="login">
+	<form data-ajax="false" method="post" action="<?php echo base_url('login/ceklogin'); ?>">
+		<?php if (!empty($this->session->flashdata('message'))) : ?>
+			<div data-role="popup">
+				<?php echo $this->session->flashdata('message'); ?>
+			</div>
+		<?php endif; ?>
 		<div class="field-contain">
 			<label for="fs_username">USERNAME</label>
-			<input type="text" name="fs_username" id="fs_username" data-clear-btn="true">
+			<input type="text" name="fs_username" id="fs_username" autocomplete="off" data-clear-btn="true">
 		</div>
 		<div class="field-contain">
 			<label for="fs_password">PASSWORD</label>
