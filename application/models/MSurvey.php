@@ -22,6 +22,18 @@ class MSurvey extends CI_Model {
 		return $sSQL;
 	}
 
+	public function checkDokumen($sKode)
+	{
+		$xSQL = ("
+			SELECT fs_kode_dokumen, fs_nama_dokumen
+			FROM tm_data_pendukung
+			WHERE fs_kode_dokumen = '".trim($sKode)."'
+		");
+
+		$sSQL = $this->db->query($xSQL);
+		return $sSQL;
+	}
+
 	public function getReferensi($sKode) 
 	{
 		$xSQL = ("
@@ -81,5 +93,39 @@ class MSurvey extends CI_Model {
 
 		$sSQL = $this->db->query($xSQL);
 		return $sSQL->row();
+	}
+
+	public function getDokumen()
+	{
+		$xSQL = ("
+			SELECT fs_kode_dokumen, fs_nama_dokumen
+			FROM tm_data_pendukung
+			WHERE fs_jenis_pembiayaan = 'P'
+		");
+
+		$xSQL = $xSQL.("
+			ORDER BY fs_nama_dokumen ASC
+		");
+
+		$sSQL = $this->db->query($xSQL);
+		return $sSQL->result();
+	}
+
+	public function getListDokumen($sKdCab, $nNoApk)
+	{
+		$xSQL = ("
+			SELECT a.fs_kode_dokumen, a.fs_dokumen_upload, b.fs_nama_dokumen
+			FROM tx_apk_data_pendukung a
+			LEFT JOIN tm_data_pendukung b ON b.fs_kode_dokumen = a.fs_kode_dokumen
+			WHERE a.fs_kode_cabang = '".trim($sKdCab)."'
+			AND a.fn_no_apk = '".trim($nNoApk)."'
+		");
+
+		$xSQL = $xSQL.("
+			ORDER BY b.fs_nama_dokumen ASC
+		");
+
+		$sSQL = $this->db->query($xSQL);
+		return $sSQL->result();
 	}
 }

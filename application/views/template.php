@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
-<html lang="id">
+<html class="ui-mobile">
 <head>
     <title><?php echo $this->template->title->default("SURVEYOR"); ?></title>
     <meta charset="utf-8">
@@ -11,10 +11,11 @@
     <link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.ico'); ?>" type="image/x-icon" />
     <link rel="stylesheet" href="<?php echo base_url('assets/css/themes/default/jquery.mobile-1.3.2.min.css'); ?>" />
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.js'); ?>"></script>
+    <!-- <script type="text/javascript" src="<?php echo base_url('assets/js/jqm.setting.mobile.js'); ?>"></script> -->
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.mobile-1.3.2.min.js'); ?>"></script>
     <?php echo $this->template->javascript; ?>
 </head>
-<body>
+<body class="ui-mobile-viewport ui-overlay-c">
 <div data-role="page">
     <?php echo $this->template->widget("header"); ?>
 

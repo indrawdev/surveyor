@@ -380,9 +380,10 @@ $config['encryption_key'] = '1XHXkoY5M9IjJbWzeuOVdLJuigmh55ef';
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] = 'ci_sessions';
+$config['sess_expiration'] = 84200;
+$config['sess_save_path'] = 'ci_sessions_survey';
 $config['sess_match_ip'] = TRUE;
+$config['sess_match_useragent'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = TRUE;
 
