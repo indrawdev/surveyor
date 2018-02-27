@@ -45,12 +45,12 @@ class Login extends CI_Controller {
 
 				// START LOGGING
 				$this->load->model('MLog');
-				$this->MLog->logger('LOGIN', $username, 'MASUK KE SISTEM SURVEY');
+				$this->MLog->logger('LOGIN', $username, 'MASUK KE SISTEM SURVEY', trim($sSQL->fs_kode_cabang));
 				// END LOGGING
-				//$this->session->set_flashdata('message', 'Please wait...');
+
 				redirect('debitur', 'refresh');
 			} else {
-				$this->session->set_flashdata('message', 'Akun tidak ada...');
+				$this->session->set_flashdata('login', 'Akun tidak ada...');
 				redirect('login', 'refresh');
 			}
 		}
@@ -58,10 +58,11 @@ class Login extends CI_Controller {
 
 	public function logout() {
 		$username = $this->encryption->decrypt($this->session->userdata('username'));
+		$cabang = $this->encryption->decrypt($this->session->userdata('kodecabang'));
 
 		// START LOGGING
 		$this->load->model('MLog');
-		$this->MLog->logger('LOGOUT', $username, 'KELUAR DARI SISTEM SURVEY');
+		$this->MLog->logger('LOGOUT', $username, 'KELUAR DARI SISTEM SURVEY', $cabang);
 		// END LOGGING
 
 		$this->session->sess_destroy();

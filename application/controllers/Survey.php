@@ -258,12 +258,25 @@ class Survey extends CI_Controller {
 		);
 
 		if ($update == true) {
+			$dt1 = array(
+				'fs_user_edit' => trim($user),
+				'fd_tanggal_edit' => date('Y-m-d H:i:s')
+			);
+
+			$data = array_merge($dt, $dt1);
 			$where = "fs_kode_cabang = '".trim($cabang)."' AND fn_no_apk = '".trim($noapk)."'";
 			$this->db->where($where);
-			$this->db->update('tx_aktifitas_surveyor', $dt);
+			$this->db->update('tx_aktifitas_surveyor', $data);
 
+			// START LOGGING
+			$this->load->model('MLog');
+			$this->MLog->logger('C1', $user, 'EDIT C1', $cabang);
+			// END LOGGING
+
+			$this->session->set_flashdata('flashc1', 'Simpan Survey C1 Berhasil...');
 			redirect('survey/survey1/'. $cabang .'/'. $noapk, 'refresh');
 		} else {
+			$this->session->set_flashdata('flashc1', 'Gagal Simpan...');
 			redirect('survey/survey1/'. $cabang .'/'. $noapk, 'refresh');
 		}
 	}
@@ -321,7 +334,7 @@ class Survey extends CI_Controller {
 		$subtotal_hargasewa = $this->input->post('fn_subtotal_hargasewa');
 		$total_rincian = $this->input->post('fn_total_rincian');
 		$pendapatan_utama = $this->input->post('fn_pendapatan_utama');
-		$pendapatan_istri = $this->input->post('fn_pendapatan_istri');
+		$pendapatan_pasangan = $this->input->post('fn_pendapatan_pasangan');
 		$pendapatan_tambahan = $this->input->post('fn_pendapatan_tambahan');
 		$total_pendapatan = $this->input->post('fn_total_pendapatan');
 		$biaya_rutin = $this->input->post('fn_biaya_rutin');
@@ -389,7 +402,7 @@ class Survey extends CI_Controller {
 			'fn_subtotal_hargasewa' => trim($subtotal_hargasewa),
 			'fn_total_rincian' => trim($total_rincian),
 			'fn_pendapatan_utama' => trim($pendapatan_utama),
-			'fn_pendapatan_istri' => trim($pendapatan_istri),
+			'fn_pendapatan_pasangan' => trim($pendapatan_pasangan),
 			'fn_pendapatan_tambahan' => trim($pendapatan_tambahan),
 			'fn_total_pendapatan' => trim($total_pendapatan),
 			'fn_biaya_rutin' => trim($biaya_rutin),
@@ -402,12 +415,25 @@ class Survey extends CI_Controller {
 		);
 
 		if ($update == true) {
+			$dt1 = array(
+				'fs_user_edit' => trim($user),
+				'fd_tanggal_edit' => date('Y-m-d H:i:s')
+			);
+
+			$data = array_merge($dt, $dt1);
 			$where = "fs_kode_cabang = '".trim($cabang)."' AND fn_no_apk = '".trim($noapk)."'";
 			$this->db->where($where);
-			$this->db->update('tx_aktifitas_surveyor', $dt);
+			$this->db->update('tx_aktifitas_surveyor', $data);
 
+			// START LOGGING
+			$this->load->model('MLog');
+			$this->MLog->logger('C2', $user, 'EDIT C2', $cabang);
+			// END LOGGING
+
+			$this->session->set_flashdata('flashc2', 'Simpan Survey C2 Berhasil...');
 			redirect('survey/survey2/'. $cabang .'/'. $noapk, 'refresh');
 		} else {
+			$this->session->set_flashdata('flashc2', 'Gagal Simpan...');
 			redirect('survey/survey2/'. $cabang .'/'. $noapk, 'refresh');
 		}
 	}
@@ -482,12 +508,25 @@ class Survey extends CI_Controller {
 		);
 
 		if ($update == true) {
+			$dt1 = array(
+				'fs_user_edit' => trim($user),
+				'fd_tanggal_edit' => date('Y-m-d H:i:s')
+			);
+
+			$data = array_merge($dt, $dt1);
 			$where = "fs_kode_cabang = '".trim($cabang)."' AND fn_no_apk = '".trim($noapk)."'";
 			$this->db->where($where);
-			$this->db->update('tx_aktifitas_surveyor', $dt);
+			$this->db->update('tx_aktifitas_surveyor', $data);
 			
+			// START LOGGING
+			$this->load->model('MLog');
+			$this->MLog->logger('C3', $user, 'EDIT C3', $cabang);
+			// END LOGGING
+
+			$this->session->set_flashdata('flashc3', 'Simpan Survey C3 Berhasil...');
 			redirect('survey/survey3/'. $cabang .'/'. $noapk, 'refresh');
 		} else {
+			$this->session->set_flashdata('flashc3', 'Gagal Simpan...');
 			redirect('survey/survey3/'. $cabang .'/'. $noapk, 'refresh');
 		}
 	}
@@ -496,31 +535,31 @@ class Survey extends CI_Controller {
 		$user = $this->encryption->decrypt($this->session->userdata('username'));
 		$cabang = $this->input->post('fs_kode_cabang');
 		$noapk = $this->input->post('fn_no_apk');
-
 		$kode = $this->input->post('fs_jenis_dokumen');
-		if(!empty($_FILES['fs_upload_file']['name'])) {
-			$config['upload_path'] = './uploads/';
-			$config['max_size'] = 5000;
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$config['file_name'] = $_FILES['fs_upload_file']['name'];
-			$config['encrypt_name'] = TRUE;
-			$config['file_ext_tolower'] = TRUE;
-			$config['overwrite'] = TRUE;
 
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
+		if(!empty($cabang) && !empty($noapk) && !empty($kode)) {
+			$this->load->model('MSurvey');
+			$sSQL = $this->MSurvey->checkDokumen($cabang, $noapk, $kode);
+			if ($sSQL->num_rows() > 0) {
+				$this->session->set_flashdata('flashc4', 'Dokumen sudah diupload...');
+				redirect('survey/survey4/'. $cabang .'/'. $noapk, 'refresh');
+			} else {
+				if (!empty($_FILES['fs_upload_file']['name'])) {
+					$config['upload_path'] = './uploads/';
+					$config['max_size'] = 5000;
+					$config['allowed_types'] = 'jpg|jpeg|png|gif';
+					$config['file_name'] = $_FILES['fs_upload_file']['name'];
+					$config['encrypt_name'] = TRUE;
+					$config['file_ext_tolower'] = TRUE;
+					$config['overwrite'] = TRUE;
 
-			if ($this->upload->do_upload('fs_upload_file')) {
-				$file = $this->upload->data();
-				$filename = $file['file_name'];
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
 
-				$this->load->model('MSurvey');
-				if(!empty($cabang) && !empty($noapk)) {
-					$sSQL = $this->MSurvey->checkDokumen($cabang, $noapk, $kode);
-					if ($sSQL->num_rows() > 0) {
-						// response
-						redirect('survey/survey4/'. $cabang .'/'. $noapk, 'refresh');
-					} else {
+					if ($this->upload->do_upload('fs_upload_file')) {
+						$file = $this->upload->data();
+						$filename = $file['file_name'];
+
 						$data = array(
 							'fs_kode_cabang' => trim($cabang),
 							'fn_no_apk' => trim($noapk),
@@ -531,15 +570,70 @@ class Survey extends CI_Controller {
 						);
 
 						$this->db->insert('tx_apk_data_pendukung', $data);
+
+						// START LOGGING
+						$this->load->model('MLog');
+						$this->MLog->logger('C4', $user, 'UPLOAD DATA PENDUKUNG', $cabang);
+						// END LOGGING
+
+						$this->session->set_flashdata('flashc4', 'Upload Berhasil...');
 						// response
 						redirect('survey/survey4/'. $cabang .'/'. $noapk, 'refresh');
+					} else {
+						$this->session->set_flashdata('flashc4', $this->upload->display_errors());
+						redirect('survey/survey4/'. $cabang .'/'. $noapk, 'refresh');
 					}
+				} else {
+					$this->session->set_flashdata('flashc4', 'File tidak ada...');
+					redirect('survey/survey4/'. $cabang .'/'. $noapk, 'refresh');
 				}
-			} else {
-				echo $this->upload->display_errors();
 			}
+		} else {
+			redirect('debitur', 'refresh');
 		}
-		
+	}
+
+	public function sesuai() {
+		$user = $this->encryption->decrypt($this->session->userdata('username'));
+		$cabang = $this->input->post('fs_kode_cabang');
+		$noapk = $this->input->post('fn_no_apk');
+
+		$flag = $this->input->post('fs_flag_survey');
+
+		$dt = array(
+			'fs_flag_survey' => trim($flag)
+		);
+
+		$update = false;
+		$this->load->model('MSurvey');
+		$sSQL = $this->MSurvey->checkAPK($cabang, $noapk);
+
+		if ($sSQL->num_rows() > 0) {
+			$update = true;
+		}
+
+		if ($update == true) {
+			$dt1 = array(
+				'fs_user_edit' => trim($user),
+				'fd_tanggal_edit' => date('Y-m-d H:i:s')
+			);
+
+			$data = array_merge($dt, $dt1);
+			$where = "fs_kode_cabang = '".trim($cabang)."' AND fn_no_apk = '".trim($noapk)."'";
+			$this->db->where($where);
+			$this->db->update('tx_aktifitas_surveyor', $data);
+
+			// START LOGGING
+			$this->load->model('MLog');
+			$this->MLog->logger('SELESAI', $user, 'DATA SURVEY ' . trim($noapk) . ' SELESAI', $cabang);
+			// END LOGGING
+
+			$this->session->set_flashdata('debitur', 'Data Survey, Berhasil di Kirim...');
+			redirect('debitur', 'refresh');
+		} else {
+			$this->session->set_flashdata('debitur', 'Data Survey, Gagal di Kirim...');
+			redirect('debitur', 'refresh');
+		}
 	}
 
 }

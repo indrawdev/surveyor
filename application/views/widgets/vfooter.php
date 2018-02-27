@@ -6,5 +6,5 @@
 	}
 ?>
 <div data-role="footer" <?php echo $fix; ?> class="ui-bar" data-theme="d">
-    <h1>Mandiri Finance Indonesia - <?php echo date('Y'); ?></h1>
+    <h1>Mandiri Finance Indonesia</h1>
 </div>

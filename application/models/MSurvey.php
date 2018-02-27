@@ -22,12 +22,14 @@ class MSurvey extends CI_Model {
 		return $sSQL;
 	}
 
-	public function checkDokumen($sKode)
+	public function checkDokumen($sKdCab, $nNoApk, $sKode)
 	{
 		$xSQL = ("
-			SELECT fs_kode_dokumen, fs_nama_dokumen
-			FROM tm_data_pendukung
-			WHERE fs_kode_dokumen = '".trim($sKode)."'
+			SELECT fs_kode_dokumen
+			FROM tx_apk_data_pendukung
+			WHERE fs_kode_cabang = '".trim($sKdCab)."' 
+			AND fn_no_apk = '".trim($nNoApk)."'
+			AND fs_kode_dokumen = '".trim($sKode)."'
 		");
 
 		$sSQL = $this->db->query($xSQL);
