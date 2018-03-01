@@ -12,13 +12,13 @@
 		<?php endforeach ; ?>
 	</select>
 	<label for="fs_handphone_pasangan">No. Handphone Pasangan:</label>
-	<input type="text" name="fs_handphone_pasangan" id="fs_handphone_pasangan" value="<?php echo $debitur->fs_handphone_pasangan; ?>" data-clear-btn="true">
+	<input type="number" name="fs_handphone_pasangan" id="fs_handphone_pasangan" value="<?php echo $debitur->fs_handphone_pasangan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==15) this.value = this.value.slice(0, - 1);">
 	<label for="fs_alamat_survey">Alamat Survey:</label>
 	<textarea cols="40" rows="8" name="fs_alamat_survey" id="fs_alamat_survey"><?php echo $debitur->fs_alamat_survey; ?></textarea>
 	<label for="fs_alamat_surat">Alamat Surat:</label>
 	<textarea cols="40" rows="8" name="fs_alamat_surat" id="fs_alamat_surat"><?php echo $debitur->fs_alamat_surat; ?></textarea>
 	<label for="fs_kodepos_pasangan">Kodepos:</label>
-	<input type="text" name="fs_kodepos_pasangan" id="fs_kodepos_pasangan" value="<?php echo $debitur->fs_kodepos_pasangan; ?>" data-clear-btn="true">
+	<input type="text" name="fs_kodepos_pasangan" id="fs_kodepos_pasangan" value="<?php echo $debitur->fs_kodepos_pasangan; ?>" data-clear-btn="true" maxlength="5">
 <h4>KORESPONDENSI</h4>
 	<label for="fs_cek_lingkungan">Cek Lingkungan:</label>
 	<select name="fs_cek_lingkungan" id="fs_cek_lingkungan" data-native-menu="false">
@@ -35,12 +35,12 @@
 		<?php endforeach ; ?>
 	</select>
 	<label for="fs_nama_korespondensi">Nama Korespondensi:</label>
-	<input type="text" name="fs_nama_korespondensi" id="fs_nama_korespondensi" value="<?php echo $debitur->fs_nama_korespondensi; ?>" data-clear-btn="true">
+	<input type="text" name="fs_nama_korespondensi" id="fs_nama_korespondensi" value="<?php echo $debitur->fs_nama_korespondensi; ?>" data-clear-btn="true" maxlength="45">
 	<label for="fs_telepon_korespondensi">Telepon Korespondensi:</label>
-	<input type="text" name="fs_telepon_korespondensi" id="fs_telepon_korespondensi" value="<?php echo $debitur->fs_telepon_korespondensi; ?>" data-clear-btn="true">
+	<input type="number" name="fs_telepon_korespondensi" id="fs_telepon_korespondensi" value="<?php echo $debitur->fs_telepon_korespondensi; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==15) this.value = this.value.slice(0, - 1);">
 <h4>DATA KELUARGA KANDUNG <i>(TIDAK TINGGAL SERUMAH)</i></h4>
 	<label for="fs_nama_saudara">Nama:</label>
-	<input type="text" name="fs_nama_saudara" id="fs_nama_saudara" value="<?php echo $debitur->fs_nama_saudara; ?>" data-clear-btn="true">
+	<input type="text" name="fs_nama_saudara" id="fs_nama_saudara" value="<?php echo $debitur->fs_nama_saudara; ?>" data-clear-btn="true" maxlength="45">
 	<label for="fs_jenis_kelamin_saudara">Jenis Kelamin:</label>
 	<select name="fs_jenis_kelamin_saudara" id="fs_jenis_kelamin_saudara" data-native-menu="false">
 		<option>Pilih</option>
@@ -58,7 +58,7 @@
 		<?php endforeach ; ?>
 	</select>
 	<label for="fs_telepon_saudara">No Telepon/Handphone:</label>
-	<input type="text" name="fs_telepon_saudara" id="fs_telepon_saudara" value="<?php echo $debitur->fs_telepon_saudara; ?>" data-clear-btn="true">
+	<input type="number" name="fs_telepon_saudara" id="fs_telepon_saudara" value="<?php echo $debitur->fs_telepon_saudara; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==15) this.value = this.value.slice(0, - 1);">
 <h4>COLLATERAL</h4>
 	<label for="fs_body">Body:</label>
 	<select name="fs_body" id="fs_body" data-native-menu="false">
@@ -96,12 +96,12 @@
 		<?php endforeach ; ?>
 	</select>
 	<label for="fn_harga_pasar">Harga Pasar saat ini:</label>
-	<input type="number" name="fn_harga_pasar" id="fn_harga_pasar" value="<?php echo $debitur->fn_harga_pasar; ?>" data-clear-btn="true">
+	<input type="number" name="fn_harga_pasar" id="fn_harga_pasar" value="<?php echo $debitur->fn_harga_pasar; ?>" data-clear-btn="true" maxlength="11">
 <h4>CAPITAL</h4>
 	<label for="fn_luas_bangunan">Luas Bangunan:</label>
-	<input type="number" name="fn_luas_bangunan" id="fn_luas_bangunan" value="<?php echo $debitur->fn_luas_bangunan; ?>" data-clear-btn="true">
+	<input type="number" name="fn_luas_bangunan" id="fn_luas_bangunan" value="<?php echo $debitur->fn_luas_bangunan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==4) this.value = this.value.slice(0, - 1);">
 	<label for="fn_luas_tanah">Luas Tanah:</label>
-	<input type="number" name="fn_luas_tanah" id="fn_luas_tanah" value="<?php echo $debitur->fn_luas_tanah; ?>" data-clear-btn="true">
+	<input type="number" name="fn_luas_tanah" id="fn_luas_tanah" value="<?php echo $debitur->fn_luas_tanah; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==4) this.value = this.value.slice(0, - 1);">
 	<label for="fs_status_kepemilikan">Status Kepemilikan:</label>
 	<select name="fs_status_kepemilikan" id="fs_status_kepemilikan" data-native-menu="false">
 		<option>Pilih</option>
@@ -131,7 +131,7 @@
 		<?php endforeach ; ?>
 	</select>
 	<label for="fs_alamat_penyimpanan">Alamat Penyimpanan:</label>
-	<textarea cols="40" rows="8" name="fs_alamat_penyimpanan" id="fs_alamat_penyimpanan"></textarea>
+	<textarea cols="40" rows="8" name="fs_alamat_penyimpanan" id="fs_alamat_penyimpanan"><?php echo $debitur->fs_alamat_penyimpanan; ?></textarea>
 	<label for="fs_jalanan_rumah">Jalanan Rumah:</label>
 	<select name="fs_jalanan_rumah" id="fs_jalanan_rumah" data-native-menu="false">
 		<option>Pilih</option>
@@ -168,18 +168,16 @@
 		<?php endforeach ; ?>
 	</select>
 	<label for="fn_unit_rumah">Unit Rumah:</label>
-	<input type="number" name="fn_unit_rumah" id="fn_unit_rumah" value="<?php echo $debitur->fn_unit_rumah; ?>" data-clear-btn="true">
+	<input type="number" name="fn_unit_rumah" id="fn_unit_rumah" value="<?php echo $debitur->fn_unit_rumah; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==3) this.value = this.value.slice(0, - 1);">
 	<label for="fn_unit_kendaraan">Unit Kendaraan:</label>
-	<input type="number" name="fn_unit_kendaraan" id="fn_unit_kendaraan" value="<?php echo $debitur->fn_unit_kendaraan; ?>" data-clear-btn="true">
-	<label for="fn_luas_bangunan">Luas Bangunan:</label>
-	<input type="number" name="fn_luas_bangunan" id="fn_luas_bangunan" value="<?php echo $debitur->fn_luas_bangunan; ?>" data-clear-btn="true">
+	<input type="number" name="fn_unit_kendaraan" id="fn_unit_kendaraan" value="<?php echo $debitur->fn_unit_kendaraan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==3) this.value = this.value.slice(0, - 1);">
 	<label for="fn_harga_asset">Harga Aset:</label>
-	<input type="number" name="fn_harga_asset" id="fn_harga_asset" value="<?php echo $debitur->fn_harga_asset; ?>" data-clear-btn="true">
-	<label for="bukti_kepemilikan_aset">Bukti Kepemilikan Aset:</label>
-	<select name="bukti_kepemilikan_aset" id="bukti_kepemilikan_aset" data-native-menu="false">
+	<input type="number" name="fn_harga_asset" id="fn_harga_asset" value="<?php echo $debitur->fn_harga_asset; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==11) this.value = this.value.slice(0, - 1);">
+	<label for="fs_bukti_kepemilikan_aset">Bukti Kepemilikan Aset:</label>
+	<select name="fs_bukti_kepemilikan_aset" id="fs_bukti_kepemilikan_aset" data-native-menu="false">
 		<option>Pilih</option>
 		<?php foreach ($bukti_kepemilikan_aset as $bka): ?>
-		<option value="<?php echo $bka->fs_nilai1_referensi; ?>" <?php if ($debitur->fs_bukti_kepemilikan_asset == $bka->fs_nilai1_referensi) { echo "selected"; } ?>><?php echo $bka->fs_nama_referensi; ?></option>
+		<option value="<?php echo $bka->fs_nilai1_referensi; ?>" <?php if ($debitur->fs_bukti_kepemilikan_aset == $bka->fs_nilai1_referensi) { echo "selected"; } ?>><?php echo $bka->fs_nama_referensi; ?></option>
 		<?php endforeach ; ?>
 	</select>
 	<input type="hidden" name="fs_kode_cabang" value="<?php echo $this->uri->segment(3); ?>" />

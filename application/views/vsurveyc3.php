@@ -18,20 +18,28 @@
 		<option value="<?php echo $jp->fs_nilai1_referensi; ?>" <?php if ($debitur->fs_jenis_pendapatan == $jp->fs_nilai1_referensi) { echo "selected"; } ?>><?php echo $jp->fs_nama_referensi; ?></option>
 		<?php endforeach; ?>
 	</select>
+	<label for="fn_omzet_perbulan">Omzet/bln:</label>
+	<input type="number" name="fn_omzet_perbulan" id="fn_omzet_perbulan" value="<?php echo $debitur->fn_omzet_perbulan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
+	<label for="fn_omzet_persen">Omzet % (Profit):</label>
+	<input type="number" name="fn_omzet_persen" id="fn_omzet_persen" value="<?php echo $debitur->fn_omzet_persen; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==2) this.value = this.value.slice(0, - 1);">
+	<label for="fn_hargasewa_perbulan">Harga Sewa/bln:</label>
+	<input type="number" name="fn_hargasewa_perbulan" id="fn_hargasewa_perbulan" value="<?php echo $debitur->fn_hargasewa_perbulan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
+	<label for="fn_hargasewa_persen">Harga Sewa % (Profit):</label>
+	<input type="number" name="fn_hargasewa_persen" id="fn_hargasewa_persen" value="<?php echo $debitur->fn_hargasewa_persen; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==2) this.value = this.value.slice(0, - 1);">
 	<label for="fn_pendapatan_utama">Pendapatan Utama:</label>
-	<input type="number" name="fn_pendapatan_utama" id="fn_pendapatan_utama" value="<?php echo $debitur->fn_pendapatan_utama; ?>" data-clear-btn="true">
+	<input type="number" name="fn_pendapatan_utama" id="fn_pendapatan_utama" value="<?php echo $debitur->fn_pendapatan_utama; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 	<label for="fn_pendapatan_pasangan">Pendapatan Pasangan:</label>
-	<input type="number" name="fn_pendapatan_pasangan" id="fn_pendapatan_pasangan" value="<?php echo $debitur->fn_pendapatan_pasangan; ?>" data-clear-btn="true">
+	<input type="number" name="fn_pendapatan_pasangan" id="fn_pendapatan_pasangan" value="<?php echo $debitur->fn_pendapatan_pasangan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 	<label for="fn_pendapatan_tambahan">Pendapatan Tambahan:</label>
-	<input type="number" name="fn_pendapatan_tambahan" id="fn_pendapatan_tambahan" value="<?php echo $debitur->fn_pendapatan_tambahan; ?>" data-clear-btn="true">
+	<input type="number" name="fn_pendapatan_tambahan" id="fn_pendapatan_tambahan" value="<?php echo $debitur->fn_pendapatan_tambahan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 	<label for="fn_biaya_rutin">Biaya Rutin:</label>
-	<input type="number" name="fn_biaya_rutin" id="fn_biaya_rutin" value="<?php echo $debitur->fn_biaya_rutin; ?>" data-clear-btn="true">
+	<input type="number" name="fn_biaya_rutin" id="fn_biaya_rutin" value="<?php echo $debitur->fn_biaya_rutin; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 	<label for="fn_angsuran_lain">Angsuran Lain:</label>
-	<input type="number" name="fn_angsuran_lain" id="fn_angsuran_lain" value="<?php echo $debitur->fn_angsuran_lain; ?>" data-clear-btn="true">
+	<input type="number" name="fn_angsuran_lain" id="fn_angsuran_lain" value="<?php echo $debitur->fn_angsuran_lain; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 	<label for="fn_angsuran_lain">Biaya Perawatan:</label>
-	<input type="number" name="fn_biaya_perawatan" id="fn_biaya_perawatan" value="<?php echo $debitur->fn_biaya_perawatan; ?>" data-clear-btn="true">
+	<input type="number" name="fn_biaya_perawatan" id="fn_biaya_perawatan" value="<?php echo $debitur->fn_biaya_perawatan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 	<label for="fn_angsuran_diajukan">Angsuran yang Diajukan:</label>
-	<input type="number" name="fn_angsuran_diajukan" id="fn_angsuran_diajukan" value="<?php echo $debitur->fn_angsuran_diajukan; ?>" data-clear-btn="true">
+	<input type="number" name="fn_angsuran_diajukan" id="fn_angsuran_diajukan" value="<?php echo $debitur->fn_angsuran_diajukan; ?>" data-clear-btn="true" onKeyDown="if(this.value.length==9) this.value = this.value.slice(0, - 1);">
 <h4>VALIDASI DOKUMEN</h4>
 	<label for="fs_valid_ktp_pemohon">KTP Pemohon:</label>
 	<select name="fs_valid_ktp_pemohon" id="fs_valid_ktp_pemohon" data-native-menu="false">
